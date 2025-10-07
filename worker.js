@@ -1,9 +1,10 @@
 import { URL } from 'url';
 import axios from 'axios';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import scanQueue from './src/lib/queue.js';
 import { query } from './src/lib/db.js';
 import { logger, auditLogger } from './src/lib/logger.js';
+
 
 const SEOScan = {
     async getHTML(url) {
