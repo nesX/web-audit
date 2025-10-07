@@ -12,7 +12,7 @@ Permitir a la app ejecutar varios procesos de escaneo simultaneo para agilizar e
 solo si es necesario
 
 
-Dame una arquitectura limpia con responsabilidades separadas, 
+Dame una arquitectura limpia con responsabilidades separadas, para las operaciones en la bd genera un archivo separado no lo integres con otra logica
 
 
 La herramienta sera usada desde consola y mostrara los escaneos y los mensajes de error que va arrojando de igual manera generara un log en la carpteta ./logs 
