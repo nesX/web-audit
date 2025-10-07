@@ -1,0 +1,19 @@
+
+# Aplicacion en Node, PG
+
+El objetivo de la app es poder escanear una web entera sea html normal o amp, verificar todos los enlaces que pertenezcan al mismo dominio de la pagina, excluir los enlaces externos
+
+Verificar en cada pagina
+El titulo y descripcion, si existe paginas con titles o descripcion duplicados o su tamano sea menor o mayor al seo recomendado
+Verificar si hay imagenes que existan las imagenes
+
+
+Permitir a la app ejecutar varios procesos de escaneo simultaneo para agilizar el trabajo pero que usen una misma cola para no repetir escaneos a paginas ya escaneadas, si es necesario puedes apoyarte en Redis 
+solo si es necesario
+
+
+Dame una arquitectura limpia con responsabilidades separadas, 
+
+
+La herramienta sera usada desde consola y mostrara los escaneos y los mensajes de error que va arrojando de igual manera generara un log en la carpteta ./logs 
+donde muestre las paginas que tienen alguna observacion y un log donde muestre el inicio del proceso y el fin, y las urls procesadas y el tiempo
