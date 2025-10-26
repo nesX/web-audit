@@ -6,7 +6,7 @@ from . import reporter
 
 def main():
     """Punto de entrada principal de la aplicación."""
-    start_url = "http://localhost"
+    start_url = "https://escuelasmex.local"
     if len(sys.argv) > 1:
         start_url = sys.argv[1]
 
