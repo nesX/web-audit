@@ -1,4 +1,8 @@
 # app/store.py
+import asyncio
+
+# Lock para evitar condiciones de carrera al agregar URLs a la cola
+queue_lock = asyncio.Lock()
 
 # Diccionarios para almacenar metadatos y registrar duplicados
 pages = {}
