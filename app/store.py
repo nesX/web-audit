@@ -18,13 +18,15 @@ warning_count = 0
 
 def add_page(url, meta):
     """Agrega una página y sus metadatos al store."""
+    normalized_url = url.rstrip('/')
     global pages
-    pages[url] = meta
-    seen_urls.add(url)
+    pages[normalized_url] = meta
+    seen_urls.add(normalized_url)
 
 def is_visited(url):
     """Verifica si una URL ya ha sido visitada."""
-    return url in seen_urls
+    normalized_url = url.rstrip('/')
+    return normalized_url in seen_urls
 
 def register_title(url, title):
     """Registra un title para detectar duplicados."""
