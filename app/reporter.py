@@ -26,14 +26,16 @@ def setup_logging():
         pass
 
 def log_error(url, msg):
-    """Registra un mensaje de error en el archivo de logs."""
+    """Registra un mensaje de error en el archivo de logs y en la consola."""
     store.error_count += 1
+    print(f"\n[ERROR] en {url}:\n  {msg}\n")
     with open(error_log_file, "a") as f:
         f.write(f"[{url}] - {msg}\n\n")
 
 def log_warning(url, msg):
-    """Registra un mensaje de advertencia en el archivo de logs."""
+    """Registra un mensaje de advertencia en el archivo de logs y en la consola."""
     store.warning_count += 1
+    print(f"\n[AVISO] en {url}:\n  {msg}\n")
     with open(warning_log_file, "a") as f:
         f.write(f"[{url}] - {msg}\n\n")
 
@@ -45,7 +47,7 @@ def update_progress(url):
 
 def print_summary():
     """Muestra el resumen final del rastreo."""
-    print("\\n" + "="*50)
+    print("\n" + "="*50)
     print("Crawl finalizado:")
 
     validated_pct = 0
