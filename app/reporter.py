@@ -29,13 +29,13 @@ def log_error(url, msg):
     """Registra un mensaje de error en el archivo de logs."""
     store.error_count += 1
     with open(error_log_file, "a") as f:
-        f.write(f"[{url}] - {msg}\\n")
+        f.write(f"[{url}] - {msg}\n\n")
 
 def log_warning(url, msg):
     """Registra un mensaje de advertencia en el archivo de logs."""
     store.warning_count += 1
     with open(warning_log_file, "a") as f:
-        f.write(f"[{url}] - {msg}\\n")
+        f.write(f"[{url}] - {msg}\n\n")
 
 def update_progress(url):
     """Muestra el progreso del rastreo en la consola."""

@@ -31,10 +31,12 @@ async def worker(session, queue, semaphore):
             for w in warnings:
                 reporter.log_warning(url, w)
 
-            for new_link in meta['links']:
-                if not store.is_visited(new_link) and store.total_links < config.MAX_PAGES:
-                    store.total_links += 1
-                    await queue.put(new_link)
+            async with store.queue_lock:
+                for new_link in meta['links']:
+                    if new_link not in store.seen_urls and store.total_links < config.MAX_PAGES:
+                        store.seen_urls.add(new_link)
+                        store.total_links += 1
+                        await queue.put(new_link)
         else:
             reporter.log_error(url, f"No se pudo descargar (status: {status})")
 
@@ -49,6 +51,7 @@ async def crawl(start_url):
     semaphore = asyncio.Semaphore(config.CONCURRENCY)
 
     store.total_links = 1
+    store.seen_urls.add(start_url)
     await queue.put(start_url)
 
     async with aiohttp.ClientSession() as session:
