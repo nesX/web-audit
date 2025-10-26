@@ -44,13 +44,17 @@ async def validate(session, semaphore, meta, url):
         warnings.append(f"Description fuera de rango ({len(meta['description'])} caracteres)")
 
     # Detección de duplicados
-    store.register_title(url, meta['title'])
-    if meta['title'] and len(store.title_index.get(meta['title'], [])) > 1:
-        errors.append(f"Title duplicado: {meta['title']}")
+    if meta['title']:
+        if meta['title'] in store.title_index:
+            original_url = store.title_index[meta['title']][0]
+            errors.append(f"Title duplicado: '{meta['title']}' (original: {original_url})")
+        store.register_title(url, meta['title'])
 
-    store.register_description(url, meta['description'])
-    if meta['description'] and len(store.description_index.get(meta['description'], [])) > 1:
-        errors.append(f"Description duplicada: {meta['description']}")
+    if meta['description']:
+        if meta['description'] in store.description_index:
+            original_url = store.description_index[meta['description']][0]
+            errors.append(f"Description duplicada: '{meta['description']}' (original: {original_url})")
+        store.register_description(url, meta['description'])
 
     # Verificación de enlaces e imágenes
     tasks = []
