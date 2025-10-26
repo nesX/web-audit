@@ -50,9 +50,12 @@ async def crawl(start_url):
     queue = asyncio.Queue()
     semaphore = asyncio.Semaphore(config.CONCURRENCY)
 
+    # Normalizar la URL de inicio para evitar duplicados por la barra final
+    normalized_url = start_url.rstrip('/')
+
     store.total_links = 1
-    store.seen_urls.add(start_url)
-    await queue.put(start_url)
+    store.seen_urls.add(normalized_url)
+    await queue.put(normalized_url)
 
     async with aiohttp.ClientSession() as session:
         tasks = []
