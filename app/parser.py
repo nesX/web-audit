@@ -23,6 +23,8 @@ def parse(html, base_url):
     links = []
     for link in soup.find_all('a', href=True):
         href = link['href']
+        if href.startswith('#'):
+            continue        
         if not href.startswith(('http://', 'https://')):
             abs_url = urljoin(base_url, href).rstrip('/')
             if config.BASE_DOMAIN in abs_url:
